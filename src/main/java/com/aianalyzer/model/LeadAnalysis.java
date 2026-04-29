@@ -1,4 +1,4 @@
-package com.example.restservice.model;
+package com.aianalyzer.model;
 
 public class LeadAnalysis {
     public String intent;

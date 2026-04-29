@@ -1,10 +1,10 @@
-package com.example.restservice;
+package com.aianalyzer;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class RestServiceApplicationTests {
+class AiLeadAnalyzerApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,7 +1,7 @@
-package com.example.restservice.controller;
+package com.aianalyzer.controller;
 
-import com.example.restservice.model.Lead;
-import com.example.restservice.service.LeadService;
+import com.aianalyzer.model.Lead;
+import com.aianalyzer.service.LeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

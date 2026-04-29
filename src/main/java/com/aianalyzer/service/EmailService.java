@@ -1,4 +1,4 @@
-package com.example.restservice.service;
+package com.aianalyzer.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,9 +30,8 @@ public class EmailService {
         message.setSubject(subject);
         message.setText(body);
 
-        System.out.println("Sending email to: " + to);
+        System.out.println("Email to: " + to);
         System.out.println("Email subject: " + subject);
-        System.out.println("Email body: " + body);
         mailSender.send(message);
     }
 

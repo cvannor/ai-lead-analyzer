@@ -1,4 +1,4 @@
-package com.example.restservice.service;
+package com.aianalyzer.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -9,8 +9,8 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Value;
 
-import com.example.restservice.model.Lead;
-import com.example.restservice.model.LeadAnalysis;
+import com.aianalyzer.model.Lead;
+import com.aianalyzer.model.LeadAnalysis;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.http.client.SimpleClientHttpRequestFactory;
@@ -30,9 +30,9 @@ public class AiService {
     public LeadAnalysis classifyLead(String message) {
         String prompt = "Extract the following from this message: intent, budget (if mentioned expressed as an integer or null), urgency(low, medium, high), leadScore (HOT, WARM, COLD) Return ONLY valid JSON. Message: "
                 + message;
+
         ResponseEntity<String> response = callOpenAiApi(prompt);
 
-        System.out.println("OpenAI API response received with status: " + response.getStatusCode());
         return parseLeadAnalysis(response.getBody());
 
     }
@@ -130,6 +130,7 @@ public class AiService {
                 + " Generate a concise and engaging email that addresses the lead's needs and encourages them to take the next step. Ask clarifying questions and encourage them to respond. Include a link to schedule a meeting if the lead is hot or warm. Return in the format: {\"emailBody\": \"...\", \"subject\": \"...\"}"
                 + " The email should be addressed to " + lead.getName() + " and signed by " + BUSINESS_NAME + ".";
 
+        System.out.println("\nGenerating contextual email content for lead: " + lead.getName());
         ResponseEntity<String> response = callOpenAiApi(prompt);
 
         JsonNode analysisJson = extractContentFromResponse(response.getBody());

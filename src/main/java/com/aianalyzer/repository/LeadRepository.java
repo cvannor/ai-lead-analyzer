@@ -1,6 +1,6 @@
-package com.example.restservice.repository;
+package com.aianalyzer.repository;
 
-import com.example.restservice.model.Lead;
+import com.aianalyzer.model.Lead;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

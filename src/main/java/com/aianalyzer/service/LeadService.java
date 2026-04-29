@@ -1,8 +1,8 @@
-package com.example.restservice.service;
+package com.aianalyzer.service;
 
-import com.example.restservice.model.Lead;
-import com.example.restservice.model.LeadAnalysis;
-import com.example.restservice.repository.LeadRepository;
+import com.aianalyzer.model.Lead;
+import com.aianalyzer.model.LeadAnalysis;
+import com.aianalyzer.repository.LeadRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,6 +29,7 @@ public class LeadService {
 
     public Lead createLead(Lead lead) {
         // Call AI service to classify the lead
+        System.out.println("\nInitiating AI lead classification for new lead: " + lead.getName());
         LeadAnalysis analysis = aiService.classifyLead(lead.getMessage());
         
         // Set the analysis data on the lead
@@ -69,7 +70,7 @@ public class LeadService {
         //External email
         JsonNode emailContent = aiService.generateContextualEmail(lead);
 
-        System.out.println("Generated email content for lead: " + lead.getName());
+        System.out.println("\nTriggering email for lead: " + lead.getName());
         emailService.sendEmail(lead.getEmail(), emailContent);
 
         //Internal email to sales team
@@ -77,13 +78,13 @@ public class LeadService {
     }
 
     private void sendInternalEmail(Lead lead) {
-        String internalEmailBody = "New lead created with the following details:\n" +
-                "Name: " + lead.getName() + "\n" +
-                "Email: " + lead.getEmail() + "\n" +
-                "Message: " + lead.getMessage() + "\n" +
-                "Intent: " + lead.getIntent() + "\n" +
-                "Budget: " + lead.getBudget() + "\n" +
-                "Urgency: " + lead.getUrgency() + "\n" +
+        String internalEmailBody = "New lead created with the following details:\n\n" +
+                "Name: " + lead.getName() + "\n\n" +
+                "Email: " + lead.getEmail() + "\n\n" +
+                "Message: " + lead.getMessage() + "\n\n" +
+                "Intent: " + lead.getIntent() + "\n\n" +
+                "Budget: " + lead.getBudget() + "\n\n" +
+                "Urgency: " + lead.getUrgency() + "\n\n" +
                 "Lead Score: " + lead.getLeadScore();
 
         String internalEmailSubject = "New Lead: " + lead.getName() + " - " + lead.getIntent();
@@ -95,7 +96,7 @@ public class LeadService {
         email.put("emailBody", internalEmailBody);
         email.put("subject", internalEmailSubject);
         
-        System.out.println("Triggering internal email");   
+        System.out.println("\nTriggering internal email:");   
         emailService.sendEmail(INTERNAL_EMAIL, email);
        
     }

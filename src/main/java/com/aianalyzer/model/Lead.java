@@ -1,4 +1,4 @@
-package com.example.restservice.model;
+package com.aianalyzer.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
