@@ -30,8 +30,8 @@ public class Lead {
     @Column(columnDefinition = "TEXT")
     private String intent;
 
-    @Column(columnDefinition = "INT")
-    private int budget;
+    @Column(columnDefinition = "TEXT")
+    private String budget;
 
     @Column(columnDefinition = "TEXT")
     private String urgency;
@@ -114,11 +114,11 @@ public class Lead {
         this.intent = intent;
     }
 
-    public int getBudget() {
+    public String getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(String budget) {
         this.budget = budget;
     }
 

@@ -2,14 +2,14 @@ package com.aianalyzer.model;
 
 public class LeadAnalysis {
     public String intent;
-    public int budget;
+    public String budget;
     public String urgency;
     public String leadScore;
 
     public LeadAnalysis() {
     }
 
-    public LeadAnalysis(String intent, int budget, String urgency, String leadScore) {
+    public LeadAnalysis(String intent, String budget, String urgency, String leadScore) {
         this.intent = intent;
         this.budget = budget;
         this.urgency = urgency;
@@ -24,11 +24,11 @@ public class LeadAnalysis {
         this.intent = intent;
     }
 
-    public int getBudget() {
+    public String getBudget() {
         return budget;
     }
 
-    public void setBudget(int budget) {
+    public void setBudget(String budget) {
         this.budget = budget;
     }
 

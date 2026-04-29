@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import com.aianalyzer.model.Lead;
 import com.aianalyzer.model.LeadAnalysis;
@@ -24,12 +25,11 @@ public class AiService {
     @Value("${openai.api.key}")
     private String API_KEY;
 
-    @Value("${business.name}")
-    private String BUSINESS_NAME;
+    @Autowired
+    private PromptLoaderService promptLoaderService;
 
     public LeadAnalysis classifyLead(String message) {
-        String prompt = "Extract the following from this message: intent, budget (if mentioned expressed as an integer or null), urgency(low, medium, high), leadScore (HOT, WARM, COLD) Return ONLY valid JSON. Message: "
-                + message;
+        String prompt = promptLoaderService.loadClassificationPrompt(message);
 
         ResponseEntity<String> response = callOpenAiApi(prompt);
 
@@ -108,7 +108,7 @@ public class AiService {
 
             LeadAnalysis analysis = new LeadAnalysis();
             analysis.setIntent(analysisJson.path("intent").asText());
-            analysis.setBudget(analysisJson.path("budget").asInt(-1));
+            analysis.setBudget(analysisJson.path("budget").asText());
             analysis.setUrgency(analysisJson.path("urgency").asText());
             analysis.setLeadScore(analysisJson.path("leadScore").asText());
 
@@ -120,15 +120,7 @@ public class AiService {
     }
 
     public JsonNode generateContextualEmail(Lead lead) {
-        // This method can be implemented similarly to classifyLead, but with a
-        // different prompt
-        // and response parsing logic to generate an email instead of lead analysis.
-        String prompt = "Based on the following lead information and the context of the message, generate a personalized email to engage the lead. Lead info: "
-                +
-                "Intent: " + lead.getIntent() + ", Budget: " + lead.getBudget() + ", Urgency: " + lead.getUrgency()
-                + ", Lead Score: " + lead.getLeadScore() + ". Message: " + lead.getMessage()
-                + " Generate a concise and engaging email that addresses the lead's needs and encourages them to take the next step. Ask clarifying questions and encourage them to respond. Include a link to schedule a meeting if the lead is hot or warm. Return in the format: {\"emailBody\": \"...\", \"subject\": \"...\"}"
-                + " The email should be addressed to " + lead.getName() + " and signed by " + BUSINESS_NAME + ".";
+        String prompt = promptLoaderService.loadEmailPrompt(lead);
 
         System.out.println("\nGenerating contextual email content for lead: " + lead.getName());
         ResponseEntity<String> response = callOpenAiApi(prompt);

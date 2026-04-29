@@ -1,0 +1,57 @@
+================================================================================
+EMAIL GENERATION PROMPT
+================================================================================
+
+Task:
+Generate a personalized, engaging email to the following lead based on their 
+information and message context.
+
+================================================================================
+LEAD INFORMATION
+================================================================================
+
+Name:        {{LEAD_NAME}}
+Intent:      {{INTENT}}
+Budget:      {{BUDGET}}
+Urgency:     {{URGENCY}}
+Lead Score:  {{LEAD_SCORE}}
+
+Original Message:
+{{MESSAGE}}
+
+================================================================================
+EMAIL GENERATION GUIDELINES
+================================================================================
+
+1. PERSONALIZATION
+   • Address the lead by their name
+   • Reference specific details from their message
+   • Show understanding of their needs and challenges
+
+2. CONTENT STRUCTURE
+   • Write a concise and engaging email
+   • Address the lead's stated needs and pain points
+   • Encourage them to take the next step
+   • Ask clarifying questions to understand their requirements better
+   • Encourage them to respond with their thoughts
+
+3. CALL TO ACTION
+   • For HOT and WARM leads: Include a link to schedule a meeting
+   • For COLD leads: Offer resources or information relevant to their needs
+   • Make the next step clear and easy
+
+4. SIGNATURE
+   • Sign off professionally with: {{BUSINESS_NAME}}
+
+================================================================================
+RESPONSE FORMAT
+================================================================================
+
+Return ONLY valid JSON with the following structure:
+
+{
+  "subject": "Email subject line (compelling and relevant)",
+  "emailBody": "Complete email body with proper formatting and line breaks"
+}
+
+================================================================================
