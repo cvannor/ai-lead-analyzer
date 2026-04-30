@@ -1,7 +1,7 @@
 
 INSERT INTO leads (name, email, message, intent, budget, urgency, lead_score, created_at) VALUES
 -- HOT leads
-('John Carter', 'john@example.com', 'I need a website for my gym, budget $3000, ASAP', 'website development', '$3000', 'high', 'HOT', CURRENT_TIMESTAMP),
+('John Carter', 'john@example.com', 'I need help automating lead follow-ups for my agency. Budget is flexible, just need this done fast.', 'website development', '$3000', 'high', 'HOT', CURRENT_TIMESTAMP),
 ('Sarah Lee', 'sarah@example.com', 'Looking to automate onboarding for my agency. Can we talk today?', 'automation system', NULL, 'high', 'HOT', CURRENT_TIMESTAMP),
 ('Mike Johnson', 'mike@example.com', 'Need Stripe integration for my app within 2 weeks', 'payment integration', NULL, 'medium', 'HOT', CURRENT_TIMESTAMP),
 
