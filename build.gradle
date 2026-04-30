@@ -21,6 +21,10 @@ bootRun {
     // jvmArgs = ["-Djavax.net.debug=all", "-Xmx2g", "-Dmy.custom.prop=value"]
 }
 
+tasks.named('compileJava') {
+	options.compilerArgs.add('-parameters')
+}
+
 repositories {
 	mavenCentral()
 }

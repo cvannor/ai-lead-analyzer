@@ -1,6 +1,7 @@
 package com.aianalyzer.model;
 
 import jakarta.persistence.*;
+
 import java.time.LocalDateTime;
 
 @Entity
@@ -21,8 +22,7 @@ public class Lead {
     private String message;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private LeadStatus status;
+    private LeadStatus status = LeadStatus.NEW;
 
     @Column(nullable = false)
     private LocalDateTime createdAt;
